@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamVault — Regarder ou télécharger</title>
+  <meta name="description" content="StreamVault : regardez ou téléchargez des épisodes d'anime — Ao Ashi, Black Clover et Tokyo Revengers.">
+  <meta property="og:title" content="StreamVault">
+  <meta property="og:description" content="Regardez ou téléchargez des épisodes d'anime.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/brand/logo.svg">
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/brand/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="StreamVault — accueil">
+        <img src="assets/brand/logo.svg" alt="" width="40" height="40">
+        <span class="brand-name">StreamVault</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        Menu
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+        <a href="#catalogue">Catalogue</a>
+        <a href="#about">À propos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title">Épisodes récents, à regarder ou télécharger</h1>
+          <p>
+            Trois sorties d’automne.
+            Regardez directement dans le navigateur, ou téléchargez le fichier pour le lire hors ligne.
+          </p>
+          <a class="btn" href="#catalogue">Voir le catalogue</a>
+        </div>
+
+        <div class="hero-posters" aria-hidden="true">
+          <img class="poster-main" src="assets/img/ao-ashi.jpg" alt="" width="400" height="600" fetchpriority="high">
+          <img class="poster-side" src="assets/img/tokyo-revengers.jpg" alt="" width="280" height="420" loading="lazy">
+          <img class="poster-side" src="assets/img/black-clover.jpg" alt="" width="280" height="420" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section id="catalogue" class="catalogue" aria-labelledby="catalogue-title">
+      <div class="catalogue-head">
+        <h2 id="catalogue-title">Catalogue</h2>
+        <p>Saison, épisode, langue et taille indiqués sur chaque fiche.</p>
+      </div>
+      <div id="episode-grid" class="episode-grid"></div>
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="about-inner">
+        <h2 id="about-title">À propos</h2>
+        <p>
+          Sur chaque fiche, utilisez Regarder pour lancer la vidéo dans le navigateur,
+          ou Télécharger pour la conserver en local (MP4).
+        </p>
+        <p>Si lecture ou téléchargement échoue, rechargez la page et réessayez.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/brand/logo.svg" alt="" width="28" height="28">
+        <span>StreamVault</span>
+      </div>
+      <p>Lecture navigateur · téléchargement MP4</p>
+    </div>
+  </footer>
+
+  <dialog id="player-dialog" class="player-dialog" aria-labelledby="player-title">
+    <div class="player-shell">
+      <div class="player-bar">
+        <h2 id="player-title" class="player-title">Lecture</h2>
+        <button type="button" class="player-close" data-player-close aria-label="Fermer le lecteur">Fermer</button>
+      </div>
+      <video id="player-video" class="player-video" controls playsinline preload="metadata"></video>
+    </div>
+  </dialog>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

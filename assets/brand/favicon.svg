@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#242a32"/>
+      <stop offset="1" stop-color="#0a0c10"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.38" stop-color="#d6dde6"/>
+      <stop offset="0.49" stop-color="#8791a0"/>
+      <stop offset="0.51" stop-color="#3a414c"/>
+      <stop offset="0.6" stop-color="#b6c0cb"/>
+      <stop offset="1" stop-color="#eef2f7"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="88" height="88" rx="22" fill="url(#plate)" stroke="#3c444f" stroke-width="2"/>
+  <path d="M63 33 A15 15 0 1 0 48 48 A15 15 0 1 1 33 63" fill="none" stroke="url(#chrome)" stroke-width="12" stroke-linecap="round"/>
+</svg>
