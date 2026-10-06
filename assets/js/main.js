@@ -64,6 +64,16 @@ const MOIS = [
   "juillet", "août", "septembre", "octobre", "novembre", "décembre",
 ];
 
+/** Sur GitHub Pages, les MP4 LFS ne sont pas servis : on utilise le CDN média GitHub. */
+function resolveMediaUrl(path) {
+  if (/^https?:\/\//i.test(path)) return path;
+  const clean = path.replace(/^\.\//, "").replace(/^\//, "");
+  if (location.hostname.endsWith("github.io")) {
+    return `https://media.githubusercontent.com/media/BROU01/streamvault/main/${clean}`;
+  }
+  return clean;
+}
+
 function formatDate(iso) {
   const [y, m, d] = iso.split("-").map(Number);
   return `${d} ${MOIS[m - 1]} ${y}`;
@@ -94,6 +104,7 @@ function episodeLabel(anime) {
 function episodeCard(anime, featuredId) {
   const nomTelechargement = `${slugify(anime.titre)}-s${String(anime.saison).padStart(2, "0")}e${String(anime.episode).padStart(2, "0")}.mp4`;
   const featured = anime.id === featuredId;
+  const mediaUrl = resolveMediaUrl(anime.fichier);
 
   return `
   <article class="episode-card${featured ? " featured" : ""}">
@@ -127,7 +138,7 @@ function episodeCard(anime, featuredId) {
           type="button"
           class="btn"
           data-watch
-          data-src="${escapeHtml(anime.fichier)}"
+          data-src="${escapeHtml(mediaUrl)}"
           data-title="${escapeHtml(anime.titre)} — S${anime.saison}E${anime.episode}"
           aria-label="Regarder ${escapeHtml(anime.titre)}, saison ${anime.saison}, épisode ${anime.episode}"
         >
@@ -135,7 +146,7 @@ function episodeCard(anime, featuredId) {
         </button>
         <a
           class="btn btn-secondary"
-          href="${anime.fichier}"
+          href="${escapeHtml(mediaUrl)}"
           download="${nomTelechargement}"
           aria-label="Télécharger ${escapeHtml(anime.titre)}, saison ${anime.saison}, épisode ${anime.episode}"
         >
@@ -168,24 +179,32 @@ function closePlayer() {
   video.removeAttribute("src");
   video.load();
   if (typeof dialog.close === "function" && dialog.open) dialog.close();
+  else dialog.removeAttribute("open");
 }
 
 function openPlayer(src, title) {
   if (!dialog || !video || !playerTitle) return;
   playerTitle.textContent = title;
+  video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "true");
   video.src = src;
-  if (typeof dialog.showModal === "function") {
-    dialog.showModal();
-  } else {
-    dialog.setAttribute("open", "");
+  video.load();
+
+  if (typeof dialog.showModal === "function") dialog.showModal();
+  else dialog.setAttribute("open", "");
+
+  // iOS : play() doit suivre le geste utilisateur ; si ça échoue, les contrôles natifs restent utilisables.
+  const attempt = video.play();
+  if (attempt && typeof attempt.catch === "function") {
+    attempt.catch(() => {});
   }
-  video.play().catch(() => {});
 }
 
 if (grille) {
   grille.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-watch]");
     if (!trigger) return;
+    event.preventDefault();
     openPlayer(trigger.dataset.src, trigger.dataset.title);
   });
 }

@@ -91,7 +91,15 @@
         <h2 id="player-title" class="player-title">Lecture</h2>
         <button type="button" class="player-close" data-player-close aria-label="Fermer le lecteur">Fermer</button>
       </div>
-      <video id="player-video" class="player-video" controls playsinline preload="metadata"></video>
+      <video
+        id="player-video"
+        class="player-video"
+        controls
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        controlslist="nodownload"
+      ></video>
     </div>
   </dialog>
 

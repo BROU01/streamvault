@@ -440,14 +440,14 @@ button:focus-visible {
   border-radius: 16px;
   background: #0c0e12;
   color: var(--ink);
-  width: min(960px, calc(100vw - 32px));
+  width: min(960px, calc(100vw - 24px));
   max-width: 960px;
+  max-height: calc(100dvh - 24px);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
 }
 
 .player-dialog::backdrop {
   background: rgba(4, 6, 9, 0.78);
-  backdrop-filter: blur(4px);
 }
 
 .player-shell {
@@ -483,6 +483,7 @@ button:focus-visible {
   border-radius: 10px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.05);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .player-close:hover {
@@ -492,9 +493,11 @@ button:focus-visible {
 .player-video {
   display: block;
   width: 100%;
-  max-height: min(70vh, 540px);
+  height: auto;
+  max-height: min(70dvh, 540px);
   background: #000;
   aspect-ratio: 16 / 9;
+  object-fit: contain;
 }
 
 /* À propos */
